@@ -47,13 +47,13 @@ mtp.subplot(1,2,2)
 x_set,y_set=x_test,y_test
 arr1=np.arange(x_set[:,0].min()-1,x_set[:,0].max()+1,0.01)
 arr2=np.arange(x_set[:,1].min()-1,x_set[:,1].max()+1,0.01)
-x1,x2=np.meshgrid(x1,x2)
+x1,x2=np.meshgrid(arr1,arr2)
 mtp.contourf(x1,x2,classifier.predict(np.array([x1.ravel(),x2.ravel()]).T).reshape(x1.shape),alpha=0.75,c=ListedColormap(('pink','gray')))
 mtp.xlim(x1.min(),x1.max())
 mtp.ylim(x2.min(),x2.max())
 
 for i,j in enumerate(np.unique(y_set)):
-    mtp.scatter(x_set[y_set==j,0],x_set[y_set==j,1],cmap=ListedColormap(('pink','gray')))
+    mtp.scatter(x_set[y_set==j,0],x_set[y_set==j,1],cmap=ListedColormap(('pink','gray')),label=j)
 
 mtp.title('NBC (test set)')
 mtp.legend()
