@@ -12,7 +12,7 @@ plt.xlabel('mét vuông')
 plt.ylabel('giá')
 
 x = np.hstack((np.ones((N, 1)), x, np.multiply(x, x)))
-w = np.array([190, -97, 1.]).reshape(-1, 1)
+w = np.array([1., 1., 1.]).reshape(-1, 1)
 
 # # Use Linear Regession
 # x_T = np.transpose(x)
@@ -21,18 +21,14 @@ w = np.array([190, -97, 1.]).reshape(-1, 1)
 
 # Use Gradient descent
 learning_rate = 0.01
-r = np.dot(x, w) - y
+r = -np.dot(x, w) + y
 v = np.zeros_like(w).reshape(-1, 1)
 gamma = 0.9
 while abs(np.average(r)) > 100:
-    v[0] = gamma * v[0] + learning_rate * np.average(r * x[:, 0].reshape(-1, 1))
-    w[0] = w[0] - v[0]
-    v[1] = gamma * v[1] + learning_rate * np.average(r * x[:, 1].reshape(-1, 1))
-    w[1] = w[1] - v[1]
-    v[2] = gamma * v[2] + learning_rate * np.average(r * x[:, 2].reshape(-1, 1))
-    w[2] = w[2] - v[2]
+    v = learning_rate/len(y) * np.dot(x.T, r)
+    w = w - v
 
-    r = np.dot(x, w) - y
+    r = -np.dot(x, w) + y
 
 predict = np.dot(x, w)
 # plt.subplot2grid((5, 2), (3, 0), rowspan=2)
