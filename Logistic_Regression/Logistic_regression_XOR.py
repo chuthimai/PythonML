@@ -39,10 +39,10 @@ for i in range(1, numOfIteration):
     print(cost[i])
 
 # Vẽ đường phân cách.
-t = 0.8
+t = 0.5
 plt.plot((0, 1), (-(w[0] + 0 * w[1] + np.log(1 / t - 1)) / w[2], -(w[0] + 1 * w[1] + np.log(1 / t - 1)) / w[2]), 'g')
 plt.show()
-
+print(w)
 
 
 
